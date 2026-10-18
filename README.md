@@ -1,5 +1,8 @@
 # plastic-drain-manhole-covers-dashboard
 
+# Link to access the dashboard on streamlit cloud using any device
+https://plastic-drain-manhole-covers-dashboard.streamlit.app/
+
 # steps to running the dashboard locally
 Step 1: Create a virtual environment
 python -m venv .venv
