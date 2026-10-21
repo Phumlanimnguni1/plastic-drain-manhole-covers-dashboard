@@ -5,10 +5,10 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # -----------------------------------------------------------------------------
-# 1. PAGE CONFIGURATION (Prevent Text Cut-Off with Clean CSS Sizing)
+# 1. PAGE CONFIGURATION (Clean CSS Sizing so Zero Text Truncates)
 # -----------------------------------------------------------------------------
 st.set_page_config(
-    page_title="PlastiNoxa | Solid 8-Stud Interlocking Eco-Block Simulator",
+    page_title="PlastiNoxa | Code 2 HDPE Solid 8-Stud Eco-Block Simulator",
     page_icon="♻️",
     layout="wide",
 )
@@ -16,8 +16,8 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    div[data-testid="stMetricValue"] {font-size: 1.6rem !important;}
-    .status-badge {padding:12px 18px; border-radius:8px; font-weight:700; font-size:0.98rem; margin-bottom:14px; display:block;}
+    div[data-testid="stMetricValue"] {font-size: 1.55rem !important;}
+    .status-badge {padding:12px 18px; border-radius:8px; font-weight:700; font-size:0.96rem; margin-bottom:14px; display:block;}
     .story-box {background-color:#eff6ff; border-left:5px solid #2563eb; padding:12px 16px; border-radius:6px; margin-bottom:14px; color:#1e293b; font-size:0.95rem;}
     .innovation-card {background-color:#f8fafc; border-left:5px solid #0f766e; padding:14px; border-radius:6px; margin-bottom:10px; color:#1e293b;}
     .commercial-card {background-color:#f0fdf4; border-left:5px solid #15803d; padding:14px; border-radius:6px; margin-bottom:10px; color:#1e293b;}
@@ -27,14 +27,14 @@ st.markdown(
 )
 
 # -----------------------------------------------------------------------------
-# 2. SESSION STATE INITIALIZATION (33% GROSS MARGIN & R270,000 SEED CAPITAL)
+# 2. SESSION STATE INITIALIZATION (R4.50/KG HDPE, WORKERS START M3, 7-MO PAYBACK)
 # -----------------------------------------------------------------------------
 defaults = {
     "fiberglass_pct": 10,
     "wall_thickness_mm": 32,
-    "contracted_pallets_mo": 50,
+    "contracted_pallets_mo": 38,
     "loi_pallets_mo": 20,
-    "monthly_fixed_opex_zar": 36000,
+    "monthly_fixed_opex_zar": 54000,
     "seed_capital_ask_zar": 270000,
 }
 for k, v in defaults.items():
@@ -42,28 +42,28 @@ for k, v in defaults.items():
         st.session_state[k] = v
 
 # -----------------------------------------------------------------------------
-# 3. HEADER & 4 COMPACT TABS (Fits Full Screen Without Scroll Arrows)
+# 3. HEADER & 4 COMPACT TABS
 # -----------------------------------------------------------------------------
-st.title("♻️ PlastiNoxa: 500×245×110mm Solid 8-Stud Interlocking Eco-Block")
+st.title("♻️ PlastiNoxa: 500×245×110mm Code 2 HDPE Solid 8-Stud Eco-Block")
 st.markdown(
-    "**Silverton (East Pretoria) Hub | SANS 1215 & Agrément SA Aligned | Code 5 rPP (3,000 Milk Bottle Caps/Block @ R4.00/kg to Reclaimers)**"
+    "**Silverton (East Pretoria) Hub | SANS 1215 & Agrément SA Aligned | Code 2 rHDPE (105 Two-Litre Milk Bottles/Block @ R4.50/kg to Reclaimers)**"
 )
 
 tab1, tab2, tab3, tab4 = st.tabs(
     [
-        "🛠️ Tab 1: Engineering & 33% Margin",
-        "🎯 Tab 2: Market & 105-Brick Pallets",
-        "🏭 Tab 3: R270k Seed & 6-Mo Roadmap",
-        "📊 Tab 4: Self-Service Analytics",
+        "🛠️ Tab 1: HDPE Engineering & 15m Wall Savings",
+        "🎯 Tab 2: Market Adoption & 105-Brick Pallets",
+        "🏭 Tab 3: R270k Seed, 7-Mo Payback & 30-Min Cure",
+        "📊 Tab 4: Self-Service Operational & Business BI",
     ]
 )
 
 # =============================================================================
-# TAB 1: SOLID 8-STUD BLOCK ENGINEERING & 33% GROSS MARGIN PRICING
+# TAB 1: CODE 2 HDPE ENGINEERING, 33% MARGIN & 15-METER WALL COST SAVINGS
 # =============================================================================
 with tab1:
     st.subheader(
-        "1. Solid 8-Stud Eco-Block (500×245×110mm) Formulation, Weather/Fire Defense & 33% Gross Margin Pricing (Excl. VAT)"
+        "1. Code 2 rHDPE Solid 8-Stud Block (500×245×110mm) Formulation, 33% Gross Margin & 15m Wall Savings (Excl. VAT)"
     )
 
     possible_imgs = [
@@ -78,7 +78,7 @@ with tab1:
         with img_col:
             st.image(
                 found_img,
-                caption="PlastiNoxa 500×245×110mm Solid 8-Stud Interlocking Eco-Block (15.0 kg | 3,000 Milk Caps)",
+                caption="PlastiNoxa 500×245×110mm Solid 8-Stud Eco-Block (15.0 kg | 4.20 kg Code 2 HDPE = 105 Milk Bottles)",
                 use_container_width=True,
             )
     else:
@@ -90,7 +90,7 @@ with tab1:
         if p1.button("🏠 Single-Storey Wall (≥14 MPa | 13.4kg)", use_container_width=True):
             st.session_state.fiberglass_pct = 4
             st.session_state.wall_thickness_mm = 24
-        if p2.button("⭐ Optimal Heavy-Duty (28.8 MPa | 15.0kg)", use_container_width=True):
+        if p2.button("⭐ Optimal Heavy-Duty (28.5 MPa | 15.0kg)", use_container_width=True):
             st.session_state.fiberglass_pct = 10
             st.session_state.wall_thickness_mm = 32
         if p3.button("🏢 Multi-Storey / Retaining (≥38 MPa | 16.5kg)", use_container_width=True):
@@ -101,52 +101,59 @@ with tab1:
         fiberglass_pct = c1.slider(
             "Glass Fiber & Talc Reinforcement (%) [Optimal: 10%–16%]",
             0, 20, key="fiberglass_pct", step=2,
-            help="Cuts thermal expansion by 75% and reinforces the 8 LEGO studs against shear.",
+            help="Locks the Code 2 HDPE chains to prevent thermal expansion and stud shear.",
         )
         wall_thickness_mm = c2.slider(
             "Solid Top Deck & Underside Tube Wall Thickness (mm) [Optimal: 32mm]",
             22, 42, key="wall_thickness_mm", step=2,
-            help="Wall thickness of solid top deck and underside coupling tubes (500×245×110mm block).",
+            help="Wall thickness molded inside our modified SCAMPER Brick Bake Bin (500×245×110mm).",
         )
 
-    rpp_pct = 30
-    mapp_uv_fire_pct = 3
-    sand_flyash_pct = 100 - rpp_pct - mapp_uv_fire_pct - fiberglass_pct
-    reclaimer_rate_per_kg = 4.00  # Human-Centric Co-Creation floor price paid to 40 reclaimers
+    rhdpe_pct = 28
+    mape_uv_fire_pct = 3
+    sand_flyash_pct = 100 - rhdpe_pct - mape_uv_fire_pct - fiberglass_pct
+    reclaimer_rate_per_kg = 4.50  # R4.50/kg paid to frontline reclaimers (+80% above R2.50 middleman rate)
 
-    # Engineering & Milk Bottle Cap Math (1.5g per milk cap -> 4.50kg rPP = 3,000 milk caps)
+    # Weight & Code 2 HDPE Diversion Math (Standard 2L HDPE milk/detergent bottle = 40g)
     unit_weight_kg = round(8.6 + (wall_thickness_mm * 0.21) - (fiberglass_pct * 0.032), 1)
-    rpp_waste_used_kg = round(unit_weight_kg * (rpp_pct / 100.0), 2)
-    milk_caps_diverted = int(round((rpp_waste_used_kg * 1000.0) / 1.5, 0))
+    rhdpe_waste_used_kg = round(unit_weight_kg * (rhdpe_pct / 100.0), 2)
+    hdpe_bottles_diverted = int(round((rhdpe_waste_used_kg * 1000.0) / 40.0, 0))
     compressive_strength_mpa = round(
         (14.5 + (fiberglass_pct * 0.90)) * ((wall_thickness_mm / 28.0) ** 1.45), 1
     )
 
-    # Verified Unit Production Cost (COGS) paying R4.00/kg to Reclaimers:
-    # Default (15.0kg, 10% fiber): rPP (4.50kg @ R4.00 = R18.00) + Sand (8.55kg @ R0.35 = R2.99)
-    # + Fiberglass/Talc (1.50kg @ R1.40 = R2.10) + MAPP/UV/Fire (R1.41) + Direct Gas/Energy (R1.10) = R25.60
+    # Verified Unit Cost (COGS Excl. VAT) with Code 2 HDPE @ R4.50/kg:
+    # Default (15.0kg, 10% fiber): rHDPE (4.20kg @ R4.50 = R18.90) + Silica Sand/Ash (8.85kg @ R0.30 = R2.655)
+    # + Waste Fiberglass/Talc (1.50kg @ R1.20 = R1.80) + MAPE/UV/Fire (R1.345) + Direct LPG Gas (R1.00) = R25.70
     raw_cost = (
-        (unit_weight_kg * 0.30 * reclaimer_rate_per_kg)
-        + (unit_weight_kg * (0.67 - fiberglass_pct / 100.0) * 0.35)
-        + (unit_weight_kg * (fiberglass_pct / 100.0) * 1.40)
+        (unit_weight_kg * (rhdpe_pct / 100.0) * reclaimer_rate_per_kg)
+        + (unit_weight_kg * (sand_flyash_pct / 100.0) * 0.30)
+        + (unit_weight_kg * (fiberglass_pct / 100.0) * 1.20)
     )
-    production_cost_zar = round(raw_cost + 1.41 + 1.10, 2)
+    production_cost_zar = round(raw_cost + 1.345 + 1.00, 2)
 
-    # 33.0% Gross Profit Margin Pricing: Price = COGS / (1 - 0.33) -> R38.21 at default!
+    # 33.0% Gross Profit Margin Pricing: Selling Price = COGS / (1 - 0.33) -> R38.36 at default!
     wholesale_price_zar = round(production_cost_zar / (1.0 - 0.33), 2)
-    retail_rrp_zar = round(wholesale_price_zar * 1.18, 2)
     unit_profit_zar = round(wholesale_price_zar - production_cost_zar, 2)
     gross_margin_pct = round((unit_profit_zar / wholesale_price_zar) * 100, 1)
 
-    # Verified Cashbuild Benchmarks (Excl. 15% VAT)
+    # Installed Cost Per Block (Zero Mortar + Zero Plaster + 40% Faster Dry-Stacking = R3.50/block labor)
+    plastinoxa_installed_block_zar = round(wholesale_price_zar + 3.50, 2)
+
+    # Traditional 500x245x110mm Concrete Block Installed Cost:
+    # Bare Block (R41.27 Excl. VAT at Cashbuild) + Wet Mortar (R7.50) + 2-Sided Plaster (R11.00) + Slow Labor & 5% Breakage (R8.23) = R68.00
+    concrete_bare_zar = 41.27
+    concrete_installed_zar = 68.00
     cement_weight = 24.0
-    cement_retail_excl = 41.27  # R47.46 Incl. VAT at Cashbuild
-    cement_installed = 53.00    # Includes wet mortar & slower bricklaying labor
     weight_saved_pct = round(((cement_weight - unit_weight_kg) / cement_weight) * 100, 1)
-    savings_per_m2_wall = int(round((cement_installed - wholesale_price_zar) * 18, 0))
+
+    savings_per_block_installed = round(concrete_installed_zar - plastinoxa_installed_block_zar, 2)
+    savings_per_m2_wall = int(round(savings_per_block_installed * 18, 0))
+    # 15-Meter Long x 2.0m High Wall = 30 m² = 540 Blocks
+    savings_15m_wall_zar = int(round(savings_per_block_installed * 540, 0))
 
     if compressive_strength_mpa >= 21.0:
-        sans_txt = "✅ EXCEEDS SANS 1215 HEAVY STRUCTURAL CLASS (≥ 21 MPa) — Houses, Warehouses & Retaining Walls"
+        sans_txt = "✅ EXCEEDS SANS 1215 HEAVY STRUCTURAL CLASS (≥ 21 MPa) — Houses, Warehouses & Boundary Walls"
         bg, fg = "#dcfce7", "#166534"
     elif compressive_strength_mpa >= 10.5:
         sans_txt = "✅ PASSES SANS 1215 STRUCTURAL LOAD-BEARING (≥ 10.5 MPa) — Single-Storey Houses & Schools"
@@ -157,87 +164,94 @@ with tab1:
 
     st.markdown(
         f'<div class="status-badge" style="background-color:{bg}; color:{fg};">'
-        f"{sans_txt}<br>Strength: {compressive_strength_mpa} MPa | Mix: {rpp_pct}% Code 5 rPP (@ R4.00/kg to Reclaimers), "
-        f"{sand_flyash_pct}% Silica Sand/Ash, {fiberglass_pct}% Glass Fiber/Talc, {mapp_uv_fire_pct}% MAPP + UV + Fire Retardant"
+        f"{sans_txt}<br>Strength: {compressive_strength_mpa} MPa | Recipe: {rhdpe_pct}% Code 2 rHDPE (@ R4.50/kg to Reclaimers), "
+        f"{sand_flyash_pct}% Silica Sand/Ash, {fiberglass_pct}% Glass Fiber/Talc, {mape_uv_fire_pct}% MAPE + UV + Flame Retardant"
         f"</div>",
         unsafe_allow_html=True,
     )
 
     k1, k2, k3, k4 = st.columns(4)
-    k1.metric("1. Factory Cost (COGS)", f"R{production_cost_zar:.2f} / block", f"R{rpp_waste_used_kg * 4:.2f} to Reclaimers (@ R4/kg)")
-    k2.metric("2. Direct Hub Price (Excl. VAT)", f"R{wholesale_price_zar:.2f} / block", f"R{unit_profit_zar:.2f} profit ({gross_margin_pct}% Margin)")
-    k3.metric("3. Hardware RRP (Excl. VAT)", f"R{retail_rrp_zar:.2f} / block", f"Saves R{savings_per_m2_wall}/m² vs Installed Cement")
-    k4.metric("Plastic Waste per Block", f"{rpp_waste_used_kg:.2f} kg Code 5 rPP", f"~{milk_caps_diverted:,} milk bottle caps!")
+    k1.metric("1. Factory Cost (COGS)", f"R{production_cost_zar:.2f} / brick", f"Includes R{rhdpe_waste_used_kg * 4.5:.2f} HDPE (@ R4.50/kg)")
+    k2.metric("2. Direct Hub Price (33% Margin)", f"R{wholesale_price_zar:.2f} / brick", f"R{unit_profit_zar:.2f} profit (Beats R41.27 Cement!)")
+    k3.metric("3. Savings on a 15m Wall (30m²)", f"R{savings_15m_wall_zar:,} Saved", f"Saves R{savings_per_m2_wall}/m² (No Mortar or Plaster!)")
+    k4.metric("Code 2 HDPE Diverted / Brick", f"{rhdpe_waste_used_kg:.2f} kg rHDPE", f"~{hdpe_bottles_diverted} two-litre milk bottles!")
 
     st.markdown(
         f'<div class="story-box">'
-        f"<b>📖 Tab 1 Executive Summary (Unit Economics & SANS 1215 Performance):</b> Each <b>500×245×110mm Solid 8-Stud Eco-Block</b> "
-        f"weighs <b>{unit_weight_kg} kg</b> ({weight_saved_pct}% lighter than a 24 kg cement block), achieves <b>{compressive_strength_mpa} MPa</b> compressive strength, "
-        f"and upcycles <b>{rpp_waste_used_kg:.2f} kg of Code 5 rPP (~{milk_caps_diverted:,} milk bottle caps at R4.00/kg)</b>. "
-        f"With a factory cost of <b>R{production_cost_zar:.2f}</b> and a Direct Hub Price of <b>R{wholesale_price_zar:.2f} (Excl. VAT)</b>, "
-        f"the unit generates <b>R{unit_profit_zar:.2f} gross profit ({gross_margin_pct}% gross margin)</b> while undercutting Cashbuild's bare 24 kg block "
-        f"(<b>R{cement_retail_excl:.2f} Excl. VAT</b>) and saving builders <b>R{savings_per_m2_wall} per m² of installed wall</b>."
+        f"<b>📖 Tab 1 Executive Summary (Unit Economics & 15-Meter Wall Savings):</b> Paying frontline reclaimers "
+        f"<b>R4.50/kg</b> for Code 2 HDPE gives a factory cost of <b>R{production_cost_zar:.2f}/brick</b> and a Direct Hub Price of "
+        f"<b>R{wholesale_price_zar:.2f}/brick</b> (<b>{gross_margin_pct}% gross margin = R{unit_profit_zar:.2f} profit/brick</b>)—making our block "
+        f"<b>cheaper than Cashbuild's bare 24 kg concrete block (R{concrete_bare_zar:.2f} Excl. VAT)</b> right off the shelf! "
+        f"Because our modified Brick Bake Bin produces a smooth, dry-stacking block requiring <b>zero mortar and zero wall plaster</b>, "
+        f"building a <b>15m × 2m wall (540 blocks)</b> costs <b>R{int(round(540 * plastinoxa_installed_block_zar, 0)):,}</b> instead of "
+        f"<b>R{int(round(540 * concrete_installed_zar, 0)):,}</b>—saving the customer <b>R{savings_15m_wall_zar:,} (38.4% cheaper)</b>!"
         f"</div>",
         unsafe_allow_html=True,
     )
 
-    df_comp = pd.DataFrame(
-        [
-            {
-                "Block Type": "PlastiNoxa 500×245×110mm Eco-Block",
-                "Factory Cost": production_cost_zar,
-                "Direct / Retail Block Price": wholesale_price_zar,
-                "Installed Cost (incl. Mortar)": retail_rrp_zar,
-                "Strength (MPa)": compressive_strength_mpa,
-                "Weight (kg)": unit_weight_kg,
-            },
-            {
-                "Block Type": "Cashbuild 500×245×110mm Heavy Block",
-                "Factory Cost": 31.50,
-                "Direct / Retail Block Price": 41.27,
-                "Installed Cost (incl. Mortar)": 53.00,
-                "Strength (MPa)": 14.0,
-                "Weight (kg)": 24.0,
-            },
-            {
-                "Block Type": "Cashbuild 450×140×220mm Sandstone",
-                "Factory Cost": 20.50,
-                "Direct / Retail Block Price": 26.43,
-                "Installed Cost (incl. Mortar)": 35.00,
-                "Strength (MPa)": 10.5,
-                "Weight (kg)": 19.5,
-            },
-        ]
-    )
-
     ch1, ch2 = st.columns(2)
     with ch1:
+        df_wall = pd.DataFrame(
+            [
+                {
+                    "Wall System (15m Long × 2m High = 540 Blocks)": "Traditional Concrete Block Wall",
+                    "1. Base Bricks (540 units)": int(round(540 * concrete_bare_zar, 0)),
+                    "2. Mortar, Plaster & 5% Breakage": int(round(540 * 19.60, 0)),
+                    "3. Wall Laying Labor": int(round(540 * 7.13, 0)),
+                },
+                {
+                    "Wall System (15m Long × 2m High = 540 Blocks)": "PlastiNoxa Code 2 HDPE Eco-Wall",
+                    "1. Base Bricks (540 units)": int(round(540 * wholesale_price_zar, 0)),
+                    "2. Mortar, Plaster & 5% Breakage": 0,
+                    "3. Wall Laying Labor": int(round(540 * 3.50, 0)),
+                },
+            ]
+        )
         fig1 = go.Figure()
         for col_name, color in [
-            ("Factory Cost", "#0f766e"),
-            ("Direct / Retail Block Price", "#14b8a6"),
-            ("Installed Cost (incl. Mortar)", "#f59e0b"),
+            ("1. Base Bricks (540 units)", "#0f766e"),
+            ("2. Mortar, Plaster & 5% Breakage", "#ef4444"),
+            ("3. Wall Laying Labor", "#f59e0b"),
         ]:
             fig1.add_trace(
                 go.Bar(
                     name=col_name,
-                    x=df_comp["Block Type"],
-                    y=df_comp[col_name],
+                    x=df_wall["Wall System (15m Long × 2m High = 540 Blocks)"],
+                    y=df_wall[col_name],
                     marker_color=color,
-                    text=df_comp[col_name].apply(lambda x: f"R{x:.2f}"),
+                    text=df_wall[col_name].apply(lambda x: f"R{x:,}" if x > 0 else "R0 (Eliminated!)"),
                     textposition="auto",
                 )
             )
         fig1.update_layout(
-            title="500×245×110mm Pricing Ladder vs. Cashbuild (ZAR Excl. VAT)",
-            barmode="group",
-            yaxis_title="ZAR per Block (Excl. VAT)",
+            title=f"Total Installed Cost for a 15-Meter Wall (Customer Saves R{savings_15m_wall_zar:,}!)",
+            barmode="stack",
+            yaxis_title="Total 15m Wall Cost (ZAR Excl. VAT)",
             legend=dict(orientation="h", y=1.12),
-            height=370,
+            height=380,
         )
         st.plotly_chart(fig1, use_container_width=True)
 
     with ch2:
+        df_comp = pd.DataFrame(
+            [
+                {
+                    "Block Type": "PlastiNoxa Code 2 HDPE Block",
+                    "Strength (MPa)": compressive_strength_mpa,
+                    "Weight (kg)": unit_weight_kg,
+                },
+                {
+                    "Block Type": "Cashbuild 500×245×110mm Heavy Block",
+                    "Strength (MPa)": 14.0,
+                    "Weight (kg)": 24.0,
+                },
+                {
+                    "Block Type": "Cashbuild 450×140×220mm Sandstone",
+                    "Strength (MPa)": 10.5,
+                    "Weight (kg)": 19.5,
+                },
+            ]
+        )
         fig2 = go.Figure()
         fig2.add_trace(
             go.Bar(
@@ -266,51 +280,51 @@ with tab1:
             barmode="group",
             yaxis_title="MPa / kg",
             legend=dict(orientation="h", y=1.12),
-            height=370,
+            height=380,
         )
         st.plotly_chart(fig2, use_container_width=True)
 
-    st.subheader("🛡️ Structural Reinforcement Against Fire, Sun, Thermal Expansion & Drops")
+    st.subheader("🛡️ Code 2 HDPE Composite Reinforcements & SCAMPER Brick Bake Bin Innovation")
     d1, d2, d3, d4 = st.columns(4)
     d1.markdown(
-        '<div class="innovation-card"><h4>🔥 1. Fire & Heat Shield</h4>'
-        "<p><b>57% non-combustible silica sand/ash</b> + <b>APP/ATH flame retardant</b> forms a self-extinguishing ceramic char barrier (SANS 10177-2 / 428 aligned).</p></div>",
+        '<div class="innovation-card"><h4>🍞 1. SCAMPER Brick Bake Bins</h4>'
+        "<p>We modify 4 heavy-duty 4-cavity steel <b>Brick Bake Bins (16 cavities total)</b> with welded 8-stud plates—giving exact 500×245×110mm dimensions and a <b>smooth plaster-free finish</b>.</p></div>",
         unsafe_allow_html=True,
     )
     d2.markdown(
-        '<div class="innovation-card"><h4>🌡️ 2. Anti-Expansion Skeleton</h4>'
-        "<p><b>57% sand + 10% fiberglass</b> chemically pinned with MAPP cuts thermal expansion by <b>75%</b>, while 0.5mm LEGO stud tolerances absorb day/night heat swings.</p></div>",
+        '<div class="innovation-card"><h4>🔥 2. Fire & Thermal Shield</h4>'
+        "<p><b>59% silica sand/fly ash + 10% fiberglass</b> pinned to Code 2 HDPE via <b>MAPE + APP flame retardant</b> cuts thermal expansion by 75% and prevents flame spread.</p></div>",
         unsafe_allow_html=True,
     )
     d3.markdown(
-        '<div class="innovation-card"><h4>☀️ 3. 50-Yr UV & House Safe</h4>'
-        "<p><b>UV Carbon Black + HALS</b> blocks sunlight at the outer 0.2mm skin with <0.5% water absorption—suitable for houses & underpinning under <b>Agrément SA</b> norms.</p></div>",
+        '<div class="innovation-card"><h4>🧱 3. No Mortar & No Plaster</h4>'
+        f"<p>8 top LEGO studs and underside coupling tubes dry-stack in 1/3 the time and require <b>zero cement mortar and zero wall plaster</b>, saving R{savings_per_m2_wall}/m².</p></div>",
         unsafe_allow_html=True,
     )
     d4.markdown(
-        '<div class="innovation-card"><h4>🔨 4. Zero Broken Corners</h4>'
-        "<p>Cement blocks suffer 5–8% breakage when dropped off trucks. Our rPP-fiberglass matrix bounces on impact with <b>0% corner breakage</b> + underside conduit cavities.</p></div>",
+        '<div class="innovation-card"><h4>⏱️ 4. 30-Min Cure & 0% Breakage</h4>'
+        "<p>Concrete blocks take <b>28 days</b> to cure and suffer 5–8% broken corners. Our 4 rotating Brick Bake Bins solidify in a water trough in <b>30 minutes (256 bricks/day)</b> with <b>0% broken corners</b>.</p></div>",
         unsafe_allow_html=True,
     )
 
 # =============================================================================
-# TAB 2: MARKET OPPORTUNITY & STANDARDIZED 105-BRICK PALLET BUNDLES
+# TAB 2: MARKET ADOPTION & STANDARDIZED 105-BRICK PALLET BUNDLES
 # =============================================================================
 with tab2:
-    st.subheader("2. Commercial Opportunity (SA / 3 Gauteng Metros / Silverton SOM) & Standardized 105-Brick Pallet Bundles")
+    st.subheader("2. Realistic Market Adoption (Starting with Boundary Walls & Extensions) & 105-Brick Pallet Bundles")
 
-    BPP = 105  # Industry standard 105 bricks per pallet (Cem Brick SA benchmark)
+    BPP = 105  # 105 bricks per pallet
 
     sc1, sc2 = st.columns(2)
     contracted_pallets_mo = sc1.slider(
-        "1. Contracted Township & Local Builders (Pallets / Month) [Default: 50 Pallets = 5,250 Bricks]",
-        10, 100, key="contracted_pallets_mo", step=5,
-        help="Each pallet contains 105 bricks (builds 5.8 m² of wall). 50 pallets/mo is just 3 local building projects.",
+        "1. Contracted Local Builders — Boundary Walls & Extensions (Pallets / Month) [Default: 38 Pallets]",
+        10, 60, key="contracted_pallets_mo", step=2,
+        help="38 pallets/mo (3,990 bricks) is ~7 boundary walls or backyard extensions per month across Mamelodi & Silverton.",
     )
     loi_pallets_mo = sc2.slider(
-        "2. Secured LOI Pipeline — Estates, Schools & Warehouses (Pallets / Month) [Default: 20 Pallets = 2,100 Bricks]",
-        5, 80, key="loi_pallets_mo", step=5,
-        help="3 Letters of Intent from Pretoria East security estates, school extensions, and Silverton industrial walls.",
+        "2. Secured LOI Pipeline — Estates, Sheds & Warehouses (Pallets / Month) [Default: 20 Pallets]",
+        5, 50, key="loi_pallets_mo", step=2,
+        help="20 pallets/mo (2,100 bricks) across 3 Pretoria East estate and Silverton industrial warehouse LOIs.",
     )
 
     total_pallets_mo = contracted_pallets_mo + loi_pallets_mo
@@ -324,44 +338,46 @@ with tab2:
     annual_som_revenue_zar = annual_som_units * wholesale_price_zar
     sam_share_pct = round((annual_som_revenue_zar / 340_000_000) * 100, 2)
 
-    # 4 Clean Metrics (Short Main Value so Nothing Truncates with "...")
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("South Africa TAM (Excl. VAT)", "R4.80 Billion / yr", "SA Civil Masonry & Block Market")
     m2.metric("3 Gauteng Metros SAM (Excl. VAT)", "R340 Million / yr", "Tshwane, Joburg & Ekurhuleni")
-    m3.metric("Full Run-Rate Annual SOM", f"R{annual_som_revenue_zar / 1_000_000:.2f}M / yr", f"{sam_share_pct}% of Gauteng SAM")
+    m3.metric("Annual SOM Run-Rate", f"R{annual_som_revenue_zar / 1_000_000:.2f}M / yr", f"Only {sam_share_pct}% of Gauteng SAM")
     m4.metric("Monthly Volume (105/Pallet)", f"{total_pallets_mo} Pallets / mo", f"{monthly_units_sold:,} bricks ({wall_area_m2_monthly:,} m² wall/mo)")
 
     st.markdown("#### 📦 Standardized Bulk Pallet Bundles (105 Bricks per Pallet — Same Transparent Price for All Buyers)")
     st.caption(
-        f"Modeled on South Africa's industry standard (**105 bricks per pallet** at **R{wholesale_price_zar:.2f}/brick = R{int(round(pallet_price_zar, 0)):,}/pallet Excl. VAT**), "
-        "helping builders plan exact pallet quantities for their project size plus our **5% Damaged-Unit Trade-In Guarantee**:"
+        f"Each pallet holds **105 bricks** at **R{wholesale_price_zar:.2f}/brick = R{int(round(pallet_price_zar, 0)):,}/pallet Excl. VAT**, "
+        f"saving builders **R{int(round(savings_per_block_installed * 105, 0)):,} per pallet** in eliminated mortar, plaster, and zero corner breakage:"
     )
 
     df_bundles = pd.DataFrame(
         [
             {
                 "Project Bundle Name": "📦 1-Pallet Starter Bundle",
-                "Bricks Included (105/Pallet)": "105 Bricks (1 Pallet)",
-                "Wall Coverage (18 bricks/m²)": "5.8 m² Wall (Underpinning / Small Room)",
-                "Flat Unit Price (Excl. VAT)": f"R{wholesale_price_zar:.2f} / brick",
-                "Total Bundle Price (Excl. VAT)": f"R{int(round(pallet_price_zar, 0)):,}",
-                "Plastic Diverted per Bundle": f"{round(105 * rpp_waste_used_kg, 1)} kg ({milk_caps_diverted * 105:,} milk caps)",
+                "Bricks Included": "105 Bricks (1 Pallet)",
+                "Wall Coverage (18/m²)": "5.8 m² Wall (Small Room / Shed)",
+                "Flat Unit Price": f"R{wholesale_price_zar:.2f} / brick",
+                "Total Bundle Price": f"R{int(round(pallet_price_zar, 0)):,}",
+                "Mortar & Plaster Saved": f"R{int(round(savings_per_block_installed * 105, 0)):,} Saved",
+                "Code 2 HDPE Diverted": f"{round(105 * rhdpe_waste_used_kg, 1)} kg ({hdpe_bottles_diverted * 105:,} milk bottles)",
             },
             {
-                "Project Bundle Name": "🏗️ 5-Pallet Extension / Boundary Bundle",
-                "Bricks Included (105/Pallet)": "525 Bricks (5 Pallets)",
-                "Wall Coverage (18 bricks/m²)": "29.2 m² Wall (2-Room Extension / 15m Wall)",
-                "Flat Unit Price (Excl. VAT)": f"R{wholesale_price_zar:.2f} / brick",
-                "Total Bundle Price (Excl. VAT)": f"R{int(round(pallet_price_zar * 5, 0)):,}",
-                "Plastic Diverted per Bundle": f"{round(525 * rpp_waste_used_kg, 1):,} kg ({milk_caps_diverted * 525:,} milk caps)",
+                "Project Bundle Name": "🏗️ 5-Pallet 15m Wall Bundle",
+                "Bricks Included": "525 Bricks (5 Pallets)",
+                "Wall Coverage (18/m²)": "29.2 m² (~15m Boundary Wall)",
+                "Flat Unit Price": f"R{wholesale_price_zar:.2f} / brick",
+                "Total Bundle Price": f"R{int(round(pallet_price_zar * 5, 0)):,}",
+                "Mortar & Plaster Saved": f"R{int(round(savings_per_block_installed * 525, 0)):,} Saved",
+                "Code 2 HDPE Diverted": f"{round(525 * rhdpe_waste_used_kg, 1):,} kg ({hdpe_bottles_diverted * 525:,} milk bottles)",
             },
             {
-                "Project Bundle Name": "🏢 10-Pallet Full House / Warehouse Bundle",
-                "Bricks Included (105/Pallet)": "1,050 Bricks (10 Pallets)",
-                "Wall Coverage (18 bricks/m²)": "58.3 m² Wall (Full House / Warehouse Partition)",
-                "Flat Unit Price (Excl. VAT)": f"R{wholesale_price_zar:.2f} / brick",
-                "Total Bundle Price (Excl. VAT)": f"R{int(round(pallet_price_zar * 10, 0)):,}",
-                "Plastic Diverted per Bundle": f"{round(1050 * rpp_waste_used_kg, 1):,} kg ({milk_caps_diverted * 1050:,} milk caps)",
+                "Project Bundle Name": "🏢 10-Pallet Full Structure Bundle",
+                "Bricks Included": "1,050 Bricks (10 Pallets)",
+                "Wall Coverage (18/m²)": "58.3 m² (Full House / Warehouse)",
+                "Flat Unit Price": f"R{wholesale_price_zar:.2f} / brick",
+                "Total Bundle Price": f"R{int(round(pallet_price_zar * 10, 0)):,}",
+                "Mortar & Plaster Saved": f"R{int(round(savings_per_block_installed * 1050, 0)):,} Saved",
+                "Code 2 HDPE Diverted": f"{round(1050 * rhdpe_waste_used_kg, 1):,} kg ({hdpe_bottles_diverted * 1050:,} milk bottles)",
             },
         ]
     )
@@ -375,19 +391,19 @@ with tab2:
                 {
                     "Market Tier": "TAM (South Africa)",
                     "Annual Value": "R4.80 Billion",
-                    "Verified Market Scope": "Total SA heavy concrete blocks, retaining walls & structural masonry (SANS 1215).",
+                    "Verified Market Scope": "Total SA heavy concrete blocks, boundary walls & structural masonry (SANS 1215).",
                 },
                 {
                     "Market Tier": "SAM (3 Gauteng Metros)",
                     "Annual Value": "R340 Million",
-                    "Verified Market Scope": "Tshwane, Johannesburg & Ekurhuleni commercial builds & 10% green-procurement tenders.",
+                    "Verified Market Scope": "Tshwane, Johannesburg & Ekurhuleni perimeter walls, extensions & 10% green tenders.",
                 },
                 {
-                    "Market Tier": "SOM (Full Run-Rate Target)",
+                    "Market Tier": "SOM (Silverton Run-Rate)",
                     "Annual Value": f"R{annual_som_revenue_zar / 1_000_000:.2f} Million",
                     "Verified Market Scope": (
-                        f"3 contracted Mamelodi/Silverton builders ({contracted_pallets_mo} pallets/mo = R{contracted_rev_yr / 1_000_000:.2f}M/yr) "
-                        f"+ 3 Pretoria East estate/warehouse LOIs ({loi_pallets_mo} pallets/mo = R{loi_rev_yr / 1_000_000:.2f}M/yr)."
+                        f"Gradual adoption via boundary walls & extensions: {contracted_pallets_mo} pallets/mo local builders "
+                        f"(R{contracted_rev_yr / 1_000_000:.2f}M/yr) + {loi_pallets_mo} pallets/mo LOI conversions (R{loi_rev_yr / 1_000_000:.2f}M/yr)."
                     ),
                 },
             ]
@@ -395,147 +411,151 @@ with tab2:
         st.table(df_tam)
 
     with r_col:
-        st.markdown("#### 🤝 Customer Profile & Circular Trade-In Value")
+        st.markdown("#### 🤝 Overcoming Contractor Conservatism (Beachhead Strategy)")
         st.markdown(
-            f'<div class="commercial-card"><b>🎯 Target Customer:</b> NHBRC/CIDB contractors, Mamelodi developers, Pretoria East estates & Silverton warehouses ordering in 105-brick pallets (hub walk-in or online website).</div>'
-            f'<div class="commercial-card"><b>💊 Pain Relieved:</b> 37.5% lighter than 24kg Cashbuild blocks; 0% broken corners when dropped; dry-stack LEGO lock saves R{savings_per_m2_wall}/m² in mortar & labor.</div>'
-            f'<div class="commercial-card"><b>♻️ 5% Damaged-Unit Trade-In:</b> Customers return any damaged block for 5% (R{wholesale_price_zar * 0.05:.2f}) off a new block—recovering R{raw_cost:.2f} of pre-compounded raw material for our shredder!</div>',
+            f'<div class="commercial-card"><b>🎯 Beachhead Entry (Cheaper Than Bare Concrete!):</b> Because our block (R{wholesale_price_zar:.2f}) is cheaper than Cashbuild\'s bare 24kg block (R41.27) and saves R{savings_15m_wall_zar:,} on a 15m wall, contractors adopt it immediately for <b>boundary walls, warehouse partitions, and backyard extensions</b>.</div>'
+            f'<div class="commercial-card"><b>🔨 Zero Delivery Breakage & Section 18 EPR Moat:</b> Contractors lose 5–8% of concrete blocks to chipped corners during transport. Our tough Code 2 HDPE + fiberglass block delivers <b>100% intact corners</b> + earns <b>+R1.20/kg PRO Section 18 EPR subsidies</b>.</div>',
             unsafe_allow_html=True,
         )
 
 # =============================================================================
-# TAB 3: R270K SEED CAPITAL, 6-MONTH PHASED ROADMAP & REALISTIC PAYBACK
+# TAB 3: R270K SEED ASK, WORKERS START MONTH 3, 7-MONTH PAYBACK & 30-MIN CURE
 # =============================================================================
 with tab3:
-    st.subheader("3. R270,000 Seed Capital, 6-Month Phased Execution (Sales Starting Month 3) & Realistic Payback")
+    st.subheader("3. R270,000 Seed Capital, 4 Factory Workers (Starting Month 3 @ R8,500/mo) & 7.0-Month Payback")
 
     fc1, fc2 = st.columns(2)
     monthly_fixed_opex_zar = fc1.slider(
-        "Silverton Monthly Fixed OPEX: Rent (R15.9k) + 2 Factory Workers (R13k) + Gas/Power (R5.6k) + Analytics (R1.5k) [Default: R36,000]",
-        25000, 80000, key="monthly_fixed_opex_zar", step=2000,
+        "Month 3+ Fixed OPEX: 4 Workers @ R8,500 (R34k) + Waltloo Rent (R14.5k) + Gas/Power (R4k) + Analytics (R1.5k) [Default: R54,000]",
+        40000, 85000, key="monthly_fixed_opex_zar", step=2000,
     )
     seed_capital_ask_zar = fc2.slider(
-        "Single-Tier Seed Capital Ask (ZAR) — Includes Worker & Reclaimer PPE + Analytics Setup [Target: R270,000]",
+        "Single-Tier Seed Capital Ask (ZAR) — 4 Brick Bake Bins + M1–M2 Testing + R4.50/kg HDPE [Locked: R270,000]",
         220000, 350000, key="seed_capital_ask_zar", step=5000,
     )
 
-    single_shift_max = 11025  # 105 pallets/month max (500 bricks/day)
+    # 30-Minute Curing Math with 4 Rotating 4-Cavity SCAMPER Brick Bake Bins (16 cavities per 30-min cycle):
+    # 16 cycles per 8-hr shift * 16 bricks/cycle = 256 bricks/day * 26 working days = 6,656 bricks/mo (63.4 pallets/mo)
+    daily_max_bricks = 256
+    working_days_mo = 26
+    single_shift_max = daily_max_bricks * working_days_mo  # 6,656 bricks/mo
+    daily_som_bricks = math.ceil(monthly_units_sold / float(working_days_mo))
     som_util_pct = round((monthly_units_sold / single_shift_max) * 100, 1)
+
     breakeven_units_mo = math.ceil(monthly_fixed_opex_zar / unit_profit_zar)
     breakeven_pallets_mo = round(breakeven_units_mo / BPP, 1)
-    daily_be_units = math.ceil(breakeven_units_mo / 22.0)
+    daily_be_units = math.ceil(breakeven_units_mo / float(working_days_mo))
 
     monthly_rev_zar = monthly_units_sold * wholesale_price_zar
     monthly_var_zar = monthly_units_sold * production_cost_zar
-    monthly_net_profit = monthly_rev_zar - monthly_var_zar - monthly_fixed_opex_zar
-    annual_net_profit = monthly_net_profit * 12
+    monthly_brick_net_profit = monthly_rev_zar - monthly_var_zar - monthly_fixed_opex_zar
+    epr_subsidy_mo = round(monthly_units_sold * rhdpe_waste_used_kg * 1.20, 0)
+    total_monthly_net_cashflow = monthly_brick_net_profit + epr_subsidy_mo
 
-    # Realistic Payback Period: Includes 2.0 Months of Zero-Sales Setup/SABS Testing + Production Months from Month 3
-    if monthly_net_profit > 0:
-        prod_months_to_recover = round(seed_capital_ask_zar / monthly_net_profit, 1)
-        total_calendar_payback_months = round(2.0 + prod_months_to_recover, 1)
-        payback_text = f"{total_calendar_payback_months} Months (Month 7)"
-        payback_delta = f"2m Setup/Test + {prod_months_to_recover}m Sales"
+    # Exact 7.0-Month Payback Math:
+    # Months 1–2 = Testing & Setup (Zero worker payroll; co-founders run SABS testing).
+    # Month 3+ = 4 Workers start on payroll; R270,000 / R53,793 net cash flow = 5.0 commercial months -> 2.0 + 5.0 = 7.0 Months Total!
+    if total_monthly_net_cashflow > 0:
+        commercial_months = round(seed_capital_ask_zar / total_monthly_net_cashflow, 1)
+        total_payback_months = round(2.0 + commercial_months, 1)
+        payback_text = f"{total_payback_months} Months (Month 7)"
+        payback_delta = f"2.0m Test (R0 Wages) + {commercial_months}m Sales"
     else:
         payback_text = "Increase SOM"
         payback_delta = "Below monthly break-even"
 
-    monthly_rpp_t = round((monthly_units_sold * rpp_waste_used_kg) / 1000.0, 1)
-    annual_rpp_t = round((annual_som_units * rpp_waste_used_kg) / 1000.0, 1)
-    annual_caps_m = round((annual_som_units * milk_caps_diverted) / 1_000_000.0, 1)
-    annual_co2e_t = round(annual_rpp_t * 1.85, 1)
-    reclaimer_pay_yr = int(round(annual_rpp_t * 1000 * reclaimer_rate_per_kg, 0))
+    monthly_rhdpe_t = round((monthly_units_sold * rhdpe_waste_used_kg) / 1000.0, 1)
+    annual_rhdpe_t = round((annual_som_units * rhdpe_waste_used_kg) / 1000.0, 1)
+    annual_bottles_m = round((annual_som_units * hdpe_bottles_diverted) / 1_000_000.0, 2)
+    annual_co2e_t = round(annual_rhdpe_t * 1.95, 1)
+    reclaimer_pay_yr = int(round(annual_rhdpe_t * 1000 * reclaimer_rate_per_kg, 0))
 
-    # Row 1: 4 Clean Metrics (Zero Text Truncation!)
     b1, b2, b3, b4 = st.columns(4)
-    b1.metric("1. Monthly Break-Even", f"{breakeven_pallets_mo} Pallets / mo", f"{breakeven_units_mo:,} bricks ({daily_be_units}/day)")
-    b2.metric("2. Total Payback (from Day 1)", payback_text, payback_delta)
-    b3.metric("3. Full SOM Net Profit", f"R{int(monthly_net_profit):,} / mo", f"R{annual_net_profit / 1_000_000:.2f}M/yr at {total_pallets_mo} pallets/mo")
-    b4.metric("4. 1-Shift Line Utilization", f"{som_util_pct}% at SOM", f"{total_pallets_mo} of 105 max pallets/mo")
+    b1.metric("1. Daily & Monthly Break-Even", f"{daily_be_units} bricks / day", f"{breakeven_units_mo:,}/mo ({breakeven_pallets_mo} pallets/mo)")
+    b2.metric("2. Total Seed Payback Time", payback_text, payback_delta)
+    b3.metric("3. Monthly Net Profit (+EPR)", f"R{int(total_monthly_net_cashflow):,} / mo", f"R{int(monthly_brick_net_profit):,} bricks + R{int(epr_subsidy_mo):,} EPR")
+    b4.metric("4. 30-Min Cure Daily Output", f"{daily_som_bricks} / {daily_max_bricks} bricks", f"{som_util_pct}% of 1-shift max (4 Bake Bins)")
 
-    # Row 2: 3 Triple-Bottom-Line Metrics
     e1, e2, e3 = st.columns(3)
     e1.metric(
-        "👷 PEOPLE: 40 Reclaimers (@ R4/kg) + 2 Factory Staff",
+        "👷 PEOPLE: 40 Reclaimers (@ R4.50/kg) + 4 Staff",
         f"R{reclaimer_pay_yr:,} / yr",
-        "Paid to reclaimers (@ R4/kg) + 2 salaried staff (R6.5k/mo each)",
+        "R4.50/kg to reclaimers + 4 workers @ R8,500/mo (starting Month 3)",
     )
     e2.metric(
-        "♻️ PLANET: Code 5 rPP Diverted (Full Run-Rate)",
-        f"{annual_rpp_t} Tonnes / yr",
-        f"{monthly_rpp_t}t/mo (~{annual_caps_m} Million milk bottle caps/yr)",
+        "♻️ PLANET: Code 2 HDPE Diverted from Landfills",
+        f"{annual_rhdpe_t} Tonnes / yr",
+        f"{monthly_rhdpe_t}t/mo (~{annual_bottles_m}M two-litre milk bottles/yr)",
     )
     e3.metric(
         "🌍 CARBON: Annual Emissions Avoided",
         f"{annual_co2e_t} Tonnes CO₂e / yr",
-        "Replaces high-emission 24kg Portland cement blocks",
+        "30-min water cure replaces 28-day Portland cement curing",
     )
 
     bc1, bc2 = st.columns([1.2, 1.15])
     with bc1:
-        u_rng = list(range(0, 11551, 1050))
+        u_rng = list(range(0, 6826, 650))
         fig_be = go.Figure()
         fig_be.add_trace(go.Scatter(x=u_rng, y=[u * wholesale_price_zar for u in u_rng], mode="lines+markers", name="Monthly Revenue (33% Margin)", line=dict(color="#0d9488", width=3)))
-        fig_be.add_trace(go.Scatter(x=u_rng, y=[monthly_fixed_opex_zar + (u * production_cost_zar) for u in u_rng], mode="lines+markers", name="Monthly Total Cost (OPEX + COGS)", line=dict(color="#ef4444", width=3, dash="dash")))
-        fig_be.add_vline(x=breakeven_units_mo, line_dash="dot", line_color="#1e40af", annotation_text=f"Break-Even: {breakeven_units_mo:,}/mo ({breakeven_pallets_mo} pallets)")
+        fig_be.add_trace(go.Scatter(x=u_rng, y=[monthly_fixed_opex_zar + (u * production_cost_zar) for u in u_rng], mode="lines+markers", name="Month 3+ Total Cost (OPEX + COGS)", line=dict(color="#ef4444", width=3, dash="dash")))
+        fig_be.add_vline(x=breakeven_units_mo, line_dash="dot", line_color="#1e40af", annotation_text=f"Break-Even: {breakeven_units_mo:,}/mo ({daily_be_units}/day)")
         fig_be.add_vline(x=monthly_units_sold, line_dash="solid", line_color="#15803d", annotation_text=f"SOM: {monthly_units_sold:,}/mo ({total_pallets_mo} pallets)")
-        fig_be.update_layout(title="Monthly Break-Even Analysis (Once Commercial Sales Start in Month 3)", xaxis_title="Bricks Sold / Month", yaxis_title="ZAR / Month (Excl. VAT)", legend=dict(orientation="h", y=1.12), height=390)
+        fig_be.update_layout(title="Month 3+ Break-Even Analysis (165 Bricks/Day Breaks Even on R54k OPEX)", xaxis_title="Bricks Sold / Month", yaxis_title="ZAR / Month (Excl. VAT)", legend=dict(orientation="h", y=1.12), height=390)
         st.plotly_chart(fig_be, use_container_width=True)
 
     with bc2:
-        st.markdown(f"#### 💰 Data-Driven Seed Capital Allocation (Total: R{int(seed_capital_ask_zar):,})")
+        st.markdown(f"#### 💰 R{int(seed_capital_ask_zar):,} Seed Capital Breakdown (Workers Paid from Month 3)")
         sf = seed_capital_ask_zar / 270000.0
         df_seed = pd.DataFrame(
             [
                 {
-                    "Seed Allocation Bucket": "1. SCAMPER Tech & 8-Stud Mold (45.7%)",
-                    "Cost (ZAR)": f"R{int(round(123450 * sf, 0)):,}",
-                    "Verified Items Included": "80 RPM silage cutter (R15k), 350L gas drum mixer & bath (R29.5k), Adendorff 100T press (R42,950), 2-cavity 8-stud mold (R36k).",
+                    "Seed Allocation Bucket": "1. SCAMPER Tech & 4 Brick Bake Bins (44.4%)",
+                    "Cost (ZAR)": f"R{int(round(120000 * sf, 0)):,}",
+                    "Verified Items Included": "80 RPM silage cutter (R15k), 350L gas drum mixer & water trough (R30k), Adendorff 100T press (R43k), 4 modified 4-cavity Brick Bake Bins (R32k).",
                 },
                 {
-                    "Seed Allocation Bucket": "2. Waltloo Lease, SANS Test & Backup (25.4%)",
-                    "Cost (ZAR)": f"R{int(round(68500 * sf, 0)):,}",
-                    "Verified Items Included": "320 Kuit St Waltloo 245m² deposit + rent (R31,850), fume hood (R12,650), SABS SANS 1215 test (R18,500), gas backup (R5,500).",
+                    "Seed Allocation Bucket": "2. Waltloo M1–M2 Lease & SANS Test (23.0%)",
+                    "Cost (ZAR)": f"R{int(round(62000 * sf, 0)):,}",
+                    "Verified Items Included": "Waltloo bay deposit + M1–M2 rent (R29k — R0 worker payroll during M1–M2!), fume hood (R14.5k), SABS SANS 1215 lab test (R18.5k).",
                 },
                 {
-                    "Seed Allocation Bucket": "3. R4/kg Feedstock + 2 Worker Salaries (19.6%)",
-                    "Cost (ZAR)": f"R{int(round(53000 * sf, 0)):,}",
-                    "Verified Items Included": "7.0T Code 5 rPP paid to 40 reclaimers @ R4.00/kg (R28k) + sand/fiber/additives (R12k) + Month-1 salaries for 2 workers (R13k).",
+                    "Seed Allocation Bucket": "3. R4.50/kg HDPE Stock & M3 Wage Float (22.2%)",
+                    "Cost (ZAR)": f"R{int(round(60000 * sf, 0)):,}",
+                    "Verified Items Included": "8.0T Code 2 HDPE @ R4.50/kg to 40 reclaimers (R36k) + sand/fiber/MAPE (R7k) + Month-3 launch wage float for 4 workers (R17k).",
                 },
                 {
-                    "Seed Allocation Bucket": "4. Worker & Reclaimer PPE + Analytics (9.3%)",
-                    "Cost (ZAR)": f"R{int(round(25050 * sf, 0)):,}",
-                    "Verified Items Included": "PPE for 2 factory workers (R4,500) + PPE for 40 reclaimers (R11,550) + 500kg scale (R2,500) + Analytics setup/hosting (R6,500).",
+                    "Seed Allocation Bucket": "4. PPE (4 Workers & 40 Reclaimers) + BI (10.4%)",
+                    "Cost (ZAR)": f"R{int(round(28000 * sf, 0)):,}",
+                    "Verified Items Included": "PPE for 4 factory workers (R8,000) + PPE for 40 reclaimers (R11,000) + 500kg digital scale (R2,500) + Analytics setup/hosting (R6,500).",
                 },
             ]
         )
         st.table(df_seed)
 
-    st.markdown("#### 🗓️ 6-Month Phased Seed Capital Deployment & Cash-Flow Roadmap (Sales Launching in Month 3)")
-    m3_4_pallets = int(round(total_pallets_mo * 0.60, 0))  # Avg 42 pallets/mo during M3-M4 ramp-up
-    m3_4_rev = int(round(m3_4_pallets * pallet_price_zar, 0))
+    st.markdown("#### 🗓️ 6-Month Phased Execution Roadmap (Worker Salaries Starting Month 3 → Full Payback in Month 7)")
     df_roadmap = pd.DataFrame(
         [
             {
-                "Timeline Phase": "Months 1 – 2: Setup, Tooling & SABS Testing",
-                "Seed Capital Spent": f"R{int(round(165000 * sf, 0)):,} (61%)",
-                "Key Activities Completed": "Secure 245m² Waltloo bay; install chaff cutter, gas drum mixer, 100T press & 8-stud mold; mold test batch & pass SABS SANS 1215 lab test.",
-                "Monthly Sales Volume": "0 Pallets (Testing Phase)",
-                "How Money Flows Through System": "100% Seed Investment Outflow: Seed capital covers rent, 2 factory workers, equipment, and SABS testing while revenue is R0.",
+                "Timeline Phase": "Months 1 – 2: Setup, Bake Bins & SABS Test",
+                "Seed Spent": f"R{int(round(165000 * sf, 0)):,} (61%)",
+                "Operational Activities": "Co-founders install chaff cutter, mixer, 100T press & 4 Brick Bake Bins; mold test batch & pass SABS SANS 1215 test (0 worker payroll in M1–M2!).",
+                "Monthly Sales": "0 Pallets (Testing & Demo Wall)",
+                "Cash-Flow Reality": "Lean Testing Phase: Deferring the 4 workers' R34k/mo payroll until Month 3 saves R68,000 in seed cash while we complete SABS certification.",
             },
             {
-                "Timeline Phase": "Months 3 – 4: Commercial Launch & Break-Even",
-                "Seed Capital Spent": f"R{int(round(75000 * sf, 0)):,} (28%)",
-                "Key Activities Completed": "Onboard 40 reclaimers (@ R4/kg); launch website & hub sales; deliver first pilot pallets to contracted Mamelodi/Silverton builders.",
-                "Monthly Sales Volume": f"35 → 50 Pallets/mo (Passes {breakeven_pallets_mo} BE!)",
-                "How Money Flows Through System": f"50% Customer Deposits Kick In: Sales cross our {breakeven_pallets_mo}-pallet monthly break-even in Month 3 (~R{m3_4_rev:,}/mo revenue).",
+                "Timeline Phase": "Months 3 – 4: Workers Start & Break-Even Passed",
+                "Seed Spent": f"R{int(round(75000 * sf, 0)):,} (28%)",
+                "Operational Activities": "4 factory workers start on shift rotation (3/day @ R8,500/mo); onboard 40 reclaimers (@ R4.50/kg); cross 40.6-pallet break-even in Month 4.",
+                "Monthly Sales": f"32 → 45 Pallets/mo (Passes {breakeven_pallets_mo} BE!)",
+                "Cash-Flow Reality": "50% Customer Deposits + Worker Launch: Customer deposits fund raw materials while Month 4 sales cover 100% of the R54,000 monthly OPEX.",
             },
             {
-                "Timeline Phase": "Months 5 – 6: Full SOM Run-Rate & Payback",
-                "Seed Capital Spent": f"R{int(round(30000 * sf, 0)):,} (11%)",
-                "Key Activities Completed": "Scale to full SOM (70 pallets/mo across contractors, estates & website); activate 5% damaged-unit trade-in loop & EPR credits.",
-                "Monthly Sales Volume": f"{total_pallets_mo} Pallets/mo ({monthly_units_sold:,} bricks)",
-                "How Money Flows Through System": f"Self-Sustaining Profit Engine: Generates R{int(monthly_rev_zar):,}/mo revenue and +R{int(monthly_net_profit):,}/mo net profit—completing full seed payback in Month 7 ({total_calendar_payback_months} mos)!",
+                "Timeline Phase": "Months 5 – 6: Full SOM & 7.0-Month Payback",
+                "Seed Spent": f"R{int(round(30000 * sf, 0)):,} (11%)",
+                "Operational Activities": f"Scale to {total_pallets_mo} pallets/mo ({daily_som_bricks} bricks/day vs {daily_max_bricks}/day max); collect +R1.20/kg Section 18 EPR credits.",
+                "Monthly Sales": f"{total_pallets_mo} Pallets/mo ({monthly_units_sold:,} bricks)",
+                "Cash-Flow Reality": f"7.0-Month Total Payback: Generates R{int(monthly_rev_zar):,}/mo revenue and +R{int(total_monthly_net_cashflow):,}/mo net cash flow—paying back R270k in {payback_text}!",
             },
         ]
     )
@@ -551,33 +571,29 @@ with tab4:
 
     with col_op:
         st.markdown("##### ⚙️ Operational Analytics (Live Factory & Yard Health)")
-        returned_bricks_mo = int(round(monthly_units_sold * 0.05, 0))
-        net_trade_in_savings_mo = int(round(returned_bricks_mo * (raw_cost - wholesale_price_zar * 0.05), 0))
-
         op1, op2 = st.columns(2)
-        op1.metric("Live Yard Pallet Inventory", "16 Pallets", "1,680 bricks (2.2 days stock buffer)")
-        op2.metric("Reclaimer rPP Stockpile", "6.8 Tonnes", "Bought @ R4.00/kg (4.5d stock ready)")
+        op1.metric("Live Yard Pallet Inventory", "14 Pallets", "1,470 bricks (2.5-day stock buffer)")
+        op2.metric("Reclaimer HDPE Stockpile", "6.2 Tonnes", "Bought @ R4.50/kg (1,475 bricks ready)")
         op3, op4 = st.columns(2)
-        op3.metric("2-Worker Daily Output", f"{math.ceil(monthly_units_sold / 22)} bricks / day", "99.4% Quality Pass | 0% Broken Corners")
-        op4.metric("5% Trade-Ins Re-Shredded", f"{returned_bricks_mo} bricks / mo", f"Saves R{net_trade_in_savings_mo:,}/mo in raw material")
+        op3.metric("3-Worker Shift Output", f"{daily_som_bricks} bricks / day", f"Max capacity: {daily_max_bricks}/day (4 Bake Bins)")
+        op4.metric("Zero-Breakage Mold Yield", "100% Intact Corners", "0% delivery breakage + 100% trim recycled")
 
     with col_biz:
         st.markdown("##### 📈 Business Analytics (Revenue, Website Orders & Margins)")
-        online_pallets_mo = int(round(total_pallets_mo * 0.26, 0))
+        online_pallets_mo = int(round(total_pallets_mo * 0.2586, 0))  # 15 pallets at default 58 pallets/mo
         online_rev_mo = int(round(online_pallets_mo * pallet_price_zar, 0))
-        epr_subsidy_mo = int(round(monthly_units_sold * rpp_waste_used_kg * 1.20, 0))
 
         bz1, bz2 = st.columns(2)
         bz1.metric("Full SOM Monthly Revenue", f"R{int(monthly_rev_zar):,} / mo", f"{total_pallets_mo} Pallets ({monthly_units_sold:,} bricks)")
         bz2.metric("🌐 Online Website Sales", f"R{online_rev_mo:,} / mo", f"{online_pallets_mo} Pallets (26% via plastinoxa.co.za)")
         bz3, bz4 = st.columns(2)
         bz3.metric("Resilient Gross Margin", f"{gross_margin_pct}% Margin", f"R{unit_profit_zar:.2f} gross profit / brick")
-        bz4.metric("Section 18 EPR Subsidy", f"+R{epr_subsidy_mo:,} / mo", "+R1.20/kg PRO credit on Code 5 rPP")
+        bz4.metric("Section 18 EPR Subsidy", f"+R{int(epr_subsidy_mo):,} / mo", "+R1.20/kg PRO credit on Code 2 HDPE")
 
     st.divider()
 
     st.markdown("#### 🔍 1-Click Self-Service Sales Explorer & Ad-Hoc Issue Investigator (No SQL Required)")
-    st.caption("Click any button below to aggregate sales by **Day of the Week**, **Week**, or **Month (Showing Months 1–2 Setup & Month 3 Launch)**, and filter by **Sales Channel**:")
+    st.caption("Click any button below to aggregate sales by **Day of the Week**, **Week**, or **Month (Showing M1–M2 Testing → M3 Worker Start → M7 Payback)**, and filter by **Sales Channel**:")
 
     flt1, flt2 = st.columns([1.4, 1.0])
     time_view = flt1.radio(
@@ -585,7 +601,7 @@ with tab4:
         [
             "📅 Daily View (Which Day of the Week Sells Most?)",
             "📊 Weekly View (Spot Weekly Dips & Load-Shedding Impact)",
-            "📈 Monthly View (6-Month Rollout: M1–M2 Testing → M3 Launch)",
+            "📈 Monthly View (M1–M2 Testing → M3 Launch → M7 Payback)",
         ],
         horizontal=True,
     )
@@ -597,39 +613,39 @@ with tab4:
 
     if "Daily" in time_view:
         x_labels = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        hub_vals = [12, 9, 4, 10, 14, 3]
-        web_vals = [4, 3, 2, 3, 4, 2]
-        chart_title = "Ad-Hoc Investigation: Average Pallets Sold by Day of the Week (Mon–Sat)"
+        hub_vals = [10, 7, 3, 8, 12, 3]
+        web_vals = [3, 2, 2, 3, 4, 1]
+        chart_title = "Ad-Hoc Investigation: Monthly Pallets Sold by Day of the Week (43 Hub + 15 Website = 58 Pallets)"
         adhoc_insight = (
-            "💡 **Ad-Hoc Discovery (Day-of-Week Pattern):** **Friday (18 pallets) and Monday (16 pallets)** generate **48.6% of weekly sales** "
-            "as contractors stock up before weekend and Monday site starts. **Wednesday is our quietest day (6 pallets)**—"
-            "**Director Action:** Schedule chaff-cutter blade maintenance and automated Online Website promos for Wednesdays."
+            "💡 **Ad-Hoc Discovery (Day-of-Week Pattern):** **Friday (16 pallets) and Monday (13 pallets)** generate **50.0% of sales** "
+            "as builders collect boundary-wall bundles ahead of weekend and Monday starts. **Wednesday is our quietest day (5 pallets)**—"
+            "**Director Action:** Worker 1 takes Wednesday off while the 3 on-shift workers clean the 4 Brick Bake Bins and run website promos."
         )
     elif "Weekly" in time_view:
         x_labels = ["Week 1", "Week 2", "Week 3 (Stage 4 Load-Shedding)", "Week 4 (Month-End Push)"]
-        hub_vals = [14, 15, 9, 14]
-        web_vals = [4, 4, 6, 4]
-        chart_title = "Ad-Hoc Investigation: Weekly Pallet Sales (Spotting the Week 3 Load-Shedding Dip)"
+        hub_vals = [11, 12, 7, 13]
+        web_vals = [4, 4, 5, 2]
+        chart_title = "Ad-Hoc Investigation: Weekly Pallet Sales (43 Hub + 15 Website = 58 Pallets/Month)"
         adhoc_insight = (
-            "💡 **Ad-Hoc Discovery (Why Did Week 3 Walk-In Sales Dip?):** Drilling into **Week 3** shows walk-in Hub sales dipped from 15 to 9 pallets during Stage 4 load-shedding, "
-            "but **Online Website Orders jumped +50% (to 6 pallets)** while our 33% gross margin and 16-pallet yard buffer kept the plant profitable!"
+            "💡 **Ad-Hoc Discovery (Why Did Week 3 Walk-In Sales Dip?):** Drilling into **Week 3** shows walk-in Hub sales dipped from 12 to 7 pallets during Stage 4 load-shedding, "
+            "but **Online Website Orders jumped to 5 pallets** while our LPG gas-heated drum mixer kept molding without 3-phase grid power!"
         )
     else:
         x_labels = [
-            "Month 1 (Setup & SABS)",
-            "Month 2 (SABS & Stockpiling)",
-            "Month 3 (Sales Launch!)",
-            "Month 4 (Ramp-Up)",
-            "Month 5 (Expansion)",
-            "Month 6 (Full SOM)",
+            "Month 1 (Testing: R0 Wages)",
+            "Month 2 (SABS Pass: R0 Wages)",
+            "Month 3 (Workers Start: 32p)",
+            "Month 4 (Passes BE: 45p)",
+            "Month 5 (Growth: 52p)",
+            "Month 6 (Full SOM: 58p)",
         ]
-        hub_vals = [0, 0, 26, 37, 45, 52]
-        web_vals = [0, 0, 9, 13, 15, 18]
-        chart_title = "Executive Report: 6-Month Phased Rollout (M1–M2 Testing → M3 Commercial Launch → M6 Full SOM)"
+        hub_vals = [0, 0, 24, 33, 38, 43]
+        web_vals = [0, 0, 8, 12, 14, 15]
+        chart_title = "Executive Report: 6-Month Rollout (M1–M2 Testing [R0 Worker Payroll] → M3 Launch → 7.0-Mo Payback)"
         adhoc_insight = (
-            f"💡 **Executive Summary (6-Month Rollout):** In **Months 1–2**, commercial sales are **0 pallets** while we complete Waltloo setup and SABS SANS 1215 testing. "
-            f"Sales launch in **Month 3 at 35 pallets** (immediately passing our **{breakeven_pallets_mo}-pallet monthly break-even**!) and scale to **70 pallets/month "
-            f"(R{int(monthly_rev_zar):,}/mo)** by Month 6, achieving full R{int(seed_capital_ask_zar):,} seed payback in **Month 7 ({total_calendar_payback_months} months)**."
+            f"💡 **Executive Summary (How We Hit 7.0 Months Payback):** In **Months 1–2**, commercial sales and worker wages are **R0** during SABS testing. "
+            f"In **Month 3**, the 4 workers start on shift rotation (32 pallets sold), crossing our **{breakeven_pallets_mo}-pallet break-even in Month 4 (45 pallets)** "
+            f"and reaching **58 pallets/month (R{int(monthly_rev_zar):,}/mo)** by Month 6—recovering the full R{int(seed_capital_ask_zar):,} seed ask in **{payback_text}**!"
         )
 
     st.info(adhoc_insight)
@@ -642,7 +658,7 @@ with tab4:
                 x=x_labels,
                 y=hub_vals,
                 marker_color="#0f766e",
-                text=[f"{v} Pallets" if v > 0 else "Setup/Testing" for v in hub_vals],
+                text=[f"{v} Pallets" if v > 0 else "Testing (R0 Wages)" for v in hub_vals],
                 textposition="auto",
             )
         )
